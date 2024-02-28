@@ -1,9 +1,6 @@
 services:
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile_backend
-      target: backend
+    image: bangw/quirknotes_backend:latest
     ports:
       - "4000:4000"
     environment:
@@ -15,3 +12,13 @@ services:
     image: mongo:latest
     ports:
       - "27017:27017"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile_frontend
+      target: frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
